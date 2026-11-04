@@ -39,9 +39,10 @@ bool Scan::numd(double &number)
                     ++i;
                     continue;
                 } // end if //
-                if (ch =='+' or ch =='-' or ch =='.' or ch =='e') {
+                if (ch =='+' or ch =='-' or ch =='.' or ch =='e'  or ch =='E') {
                     switch (ch) {
                     case 'e':
+                    case 'E':
                         if (!ex10) {
                             ex10=true;
                             point=true;
