@@ -3,7 +3,7 @@
 void OpenStruc::readSectionTypes(real **(&sectionTypes))
 {    
     dimMat(sectionTypes, numberOfSectionTypes,static_cast<intPos>(9)); // there are 8+1 section Properties, 6 of which will be stored in element record
-    intPos matType=1, secType=3;
+    intPos matType=1, secType;
     double val;
     int iVal;
     for (auto i=one; i<=numberOfSectionTypes; ++i) {    
@@ -17,32 +17,42 @@ void OpenStruc::readSectionTypes(real **(&sectionTypes))
                    sectionTypes[i][1] = static_cast<real>(val);
                    secType = 1;
                 } // end if //
-            } else if ( matchs("d", 1) ) {
-                if (numd(val)) {
-                   sectionTypes[i][1] = static_cast<real>(val);
-                   secType = 2;
-                } // end if //
-            } else if (matchs("ar", 2) ) {
-                if (numd(val)) {
-                   sectionTypes[i][1] = static_cast<real>(val);
-                } // end if //
             } else if(matchs("h", 1) ) {
                 if (numd(val)) {
                    sectionTypes[i][2] = static_cast<real>(val);
                    secType = 1;
                 } // end if //
+                
+                
+            } else if ( matchs("d", 1) ) {
+                if (numd(val)) {
+                   sectionTypes[i][1] = static_cast<real>(val);
+                   secType = 2;
+                } // end if //
+                
+                
+            } else if (matchs("ar", 2) ) {
+                if (numd(val)) {
+                   secType = 3;
+                   sectionTypes[i][1] = static_cast<real>(val);
+                } // end if //
             } else if(matchs("Ix", 2) ) {
                 if (numd(val)) {
+                   secType = 3;
                    sectionTypes[i][2] = static_cast<real>(val);
                 } // end if //
             } else if(matchs("Iy", 2)) {
                 if (numd(val)) {
+                   secType = 3;
                    sectionTypes[i][3] = static_cast<real>(val);
                 } // end if //
             } else if(matchs("Iz", 2)) {
                 if (numd(val)) {
+                   secType = 3;
                    sectionTypes[i][4] = static_cast<real>(val);
                 } // end if //        
+                
+                
             } else if(matchs("mt", 2)) {
                 if (integr(iVal)) {
                     matType= static_cast<intPos>(iVal);
